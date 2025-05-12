@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils'
 import { toggleLike, toggleBookmark } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/hooks/use-toast'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 
 interface CardItemProps {
   item: Item
@@ -112,19 +113,21 @@ export function CardItem({
       onClick={() => onOpenDetails(item.id)}
     >
       <div className="relative aspect-video overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={
-            item.imageUrl || 'https://images.pexels.com/photos/4386429/pexels-photo-4386429.jpeg'
-          }
-          alt={item.title}
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-        />
+        <AspectRatio ratio={16 / 9} className="w-full">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={item.imageUrl || `/images/no-image.png`}
+            alt={item.title}
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </AspectRatio>
       </div>
 
       <CardContent className="p-4">
         <h3 className="mb-2 line-clamp-2 text-lg font-semibold">{item.title}</h3>
+
+        <p className="line-clamp-3 text-sm text-muted-foreground">{item.description}</p>
 
         <div className="mt-2 flex flex-wrap gap-1">
           {displayTags.map((tag) => (

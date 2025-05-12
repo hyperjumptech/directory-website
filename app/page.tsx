@@ -70,7 +70,7 @@ export default async function Home(props: HomePageProps) {
   )
   return (
     <>
-      <SiteHeader user={user} />
+      <SiteHeader user={user} title={contents['landingTitle']} />
 
       <main className="container w-full space-y-4 px-4 py-6 md:py-10">
         <div className="mb-10">

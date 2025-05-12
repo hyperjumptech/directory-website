@@ -18,9 +18,10 @@ import { useTheme } from 'next-themes'
 
 interface SiteHeaderProps {
   user: User | null
+  title?: string
 }
 
-export function SiteHeader({ user }: SiteHeaderProps) {
+export function SiteHeader({ user, title = 'Vibe Coding' }: SiteHeaderProps) {
   const { theme, setTheme } = useTheme()
   const isDark = theme === 'dark'
 
@@ -29,7 +30,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
           <Grid className="h-6 w-6" />
-          <span className="text-xl font-bold">Curated</span>
+          <span className="text-xl font-bold">{title}</span>
         </Link>
 
         <nav className="flex items-center space-x-2">
